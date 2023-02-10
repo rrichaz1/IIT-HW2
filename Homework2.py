@@ -178,13 +178,15 @@ class ArrayList:
           self.data[j], self.data[j + 1] = self.data[j + 1], self.data[j]
 
   def __iter__(self):
-    # This implements "for item in ArrayList".
-    # return an AL_iterator object as the iterator for ArrayList.
-    # The iterator object should iterate on self.data, starts at index 0, end at index self.length
-    for i in range(self.length):
-      yield self.data[i]
+      # This implements "for item in ArrayList".
+      # return an AL_iterator object as the iterator for ArrayList.
+      # The iterator object should iterate on self.data, starts at index 0, end at index self.length
+      # for i in range(self.length):
+      #   yield self.data[i]
 
-    # return AL_iterator(self.data, 0, self.length)
+      return self.AL_iterator(self.data, 0, self.length)
+  
+  
 
   class AL_iterator:
     # This is a helper class that's used to create ArrayList iterator object.
@@ -208,17 +210,22 @@ class ArrayList:
       # in self.data, then move self.pointer to the next spot.
       # Else, raise the StopIteration() exception
       if self.pointer < self.end:
-          item = self.list(self.pointer)
+          item = self.list[self.pointer]
           self.pointer+=1
           return item
       else:
           raise StopIteration
 
+    def __iter__(self):
+        return self    
+
+ 
+  
   def __repr__(self):
     # This implements "print(ArrayList)"
-
+    
     #############################       DO NOT CHANGE THIS       #################################
-    return "[" + ", ".join(str(item) for item in self.list) + "]"
+    return "[" + ", ".join(str(item) for item in self) + "]"
 
 
 ########################################################################################################################
